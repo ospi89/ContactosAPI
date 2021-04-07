@@ -34,8 +34,8 @@ const findById = async (query, id) => {
       return result;
   } catch (err) {
       console.log('error handler');
-      mssql.close();
-      return err
+      console.error(err)
+      return mssql.close()
   }
 }
 
