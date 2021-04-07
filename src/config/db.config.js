@@ -11,7 +11,7 @@ const sqlConfig = {
   user: 'franklin',
   server: 'localhost',
 }
-const executeQuery = async (query) => {
+const search = async (query) => {
   try {
       // make sure that any items are correctly URL encoded in the connection string
       await sql.connect(sqlConfig)
@@ -24,4 +24,22 @@ const executeQuery = async (query) => {
   }
 }
 
-module.exports.executeQuery = executeQuery;
+const findById = async (query, id) => {
+  try {
+      // make sure that any items are correctly URL encoded in the connection string
+      const pool = await sql.connect(sqlConfig)
+      const result = await pool.request()
+        .input('id', sql.Int, id)
+        .query(query)
+      return result;
+  } catch (err) {
+      console.log('error handler');
+      mssql.close();
+      return err
+  }
+}
+
+module.exports = {
+  search,
+  findById
+};

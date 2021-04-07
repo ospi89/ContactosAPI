@@ -10,7 +10,7 @@ var api = express.Router();
  
 // GET
 api.get('/', ContactoController.findAll);
-// api.get('/:id', ContactoController.findById);
+api.get('/:id', ContactoController.findById);
  
 // PUTn
 // api.put('/:id', ContactoController.update);

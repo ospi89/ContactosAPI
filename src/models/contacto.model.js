@@ -1,5 +1,5 @@
 'use strict';
-var dbConn = require('./../config/db.config');
+const dbConn = require('./../config/db.config');
 
 const Contacto = function (contacto) {
   this.primerNombre = contacto.primerNombre;
@@ -11,8 +11,13 @@ const Contacto = function (contacto) {
 };
 
 Contacto.findAll = async function (result) {
-  const contactos = await dbConn.executeQuery("Select * from Contacto");
+  const contactos = await dbConn.search("SELECT * FROM Contacto");
   result(null, contactos);
+};
+
+Contacto.findById = async function (id, result) {
+  const contacto = await dbConn.findById(`SELECT * FROM Contacto WHERE contactoId = @id`, id);
+  result(null, contacto);
 };
 
 exports.Contacto = Contacto;
