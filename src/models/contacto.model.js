@@ -10,8 +10,8 @@ const Contacto = function (employee) {
   this.updatedAt = employee.updatedAt;
 };
 
-Employee.findAll = function (result) {
-  dbConn.query("Select * from employees", function (err, res) {
+Contacto.findAll = function (result) {
+  dbConn.executeQuery("Select * from Contacto", function (err, res) {
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -21,3 +21,4 @@ Employee.findAll = function (result) {
     }
   });
 };
+exports.Contacto = Contacto;
