@@ -6,7 +6,7 @@ var ContactoController = require('../controllers/contacto');
 var api = express.Router();
  
 // POST
-// api.post('/contacto', ContactoController.create);
+api.post('/', ContactoController.create);
  
 // GET
 api.get('/', ContactoController.findAll);

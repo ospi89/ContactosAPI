@@ -33,4 +33,24 @@ Contacto.update = async function (id, contacto, result) {
   result(null, data);
 };
 
+Contacto.create = async function (contacto, result) {
+  contacto.createdAt = new Date();
+  contacto.updatedAt = new Date();
+  const data = await dbConn.create(`INSERT INTO [dbo].[Contacto]
+    ([primerNombre]
+    ,[segundoNombre]
+    ,[primerApellido]
+    ,[telefono]
+    ,[createdAt]
+    ,[updatedAt])
+  VALUES
+    (@primerNombre
+    ,@segundoNombre
+    ,@primerApellido
+    ,@telefono
+    ,@createdAt
+    ,@updatedAt)`, contacto);
+  result(null, data);
+};
+
 exports.Contacto = Contacto;
