@@ -12,8 +12,8 @@ var api = express.Router();
 api.get('/', ContactoController.findAll);
 api.get('/:id', ContactoController.findById);
  
-// PUTn
-// api.put('/:id', ContactoController.update);
+// PUT
+api.put('/:id', ContactoController.update);
  
 // DELETE
 // api.delete('/:id', ContactoController.delete);
