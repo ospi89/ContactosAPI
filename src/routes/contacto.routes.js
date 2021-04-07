@@ -16,6 +16,6 @@ api.get('/:id', ContactoController.findById);
 api.put('/:id', ContactoController.update);
  
 // DELETE
-// api.delete('/:id', ContactoController.delete);
+api.delete('/:id', ContactoController.delete);
  
 module.exports = api;

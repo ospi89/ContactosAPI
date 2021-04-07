@@ -40,3 +40,10 @@ exports.create = function (req, res) {
     });
   }
 };
+
+exports.delete = function (req, res) {
+  Contacto.delete(req.params.id, function (err) {
+    if (err) res.send(err);
+    res.json({ error: false, message: "Se ha eliminado el contacto." });
+  });
+};

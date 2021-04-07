@@ -79,9 +79,25 @@ const create = async (query, contacto) => {
   }
 }
 
+const deleteElement = async (query, id) => {
+  try {
+      // make sure that any items are correctly URL encoded in the connection string
+      const pool = await sql.connect(sqlConfig)
+      const result = await pool.request()
+        .input('id', sql.Int, id)
+        .query(query)
+      return result;
+  } catch (err) {
+      console.log('error handler');
+      console.error(err)
+      return sql.close()
+  }
+}
+
 module.exports = {
   search,
   findById,
   update,
-  create
+  create,
+  deleteElement
 };

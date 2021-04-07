@@ -1,5 +1,4 @@
 'use strict';
-const { DateTime } = require('mssql');
 const dbConn = require('./../config/db.config');
 
 const Contacto = function (contacto) {
@@ -21,21 +20,21 @@ Contacto.findById = async function (id, result) {
   result(null, contacto);
 };
 
-Contacto.update = async function (id, contacto, result) {
-  contacto.updatedAt = new Date();
+Contacto.update = async function (id, obj, result) {
+  obj.updatedAt = new Date();
   const data = await dbConn.update(`UPDATE [dbo].[Contacto]
     SET [primerNombre] = @primerNombre
         ,[segundoNombre] = @segundoNombre
         ,[primerApellido] = @primerApellido
         ,[telefono] = @telefono
         ,[updatedAt] = @updatedAt
-    WHERE contactoId = @id`, id, contacto);
+    WHERE contactoId = @id`, id, obj);
   result(null, data);
 };
 
-Contacto.create = async function (contacto, result) {
-  contacto.createdAt = new Date();
-  contacto.updatedAt = new Date();
+Contacto.create = async function (obj, result) {
+  obj.createdAt = new Date();
+  obj.updatedAt = new Date();
   const data = await dbConn.create(`INSERT INTO [dbo].[Contacto]
     ([primerNombre]
     ,[segundoNombre]
@@ -49,7 +48,13 @@ Contacto.create = async function (contacto, result) {
     ,@primerApellido
     ,@telefono
     ,@createdAt
-    ,@updatedAt)`, contacto);
+    ,@updatedAt)`, obj);
+  result(null, data);
+};
+
+Contacto.delete = async function (id, result) {
+  const data = await dbConn.deleteElement(`DELETE FROM [dbo].[Contacto]
+  WHERE contactoId = @id`, id);
   result(null, data);
 };
 
